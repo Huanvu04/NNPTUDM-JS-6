@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+const userController = require('../controllers/users');
 let { checkLogin } = require('../utils/authHandler')
 let { userCreateValidator
     , userUpdateValidator
@@ -88,5 +89,5 @@ router.delete("/:id", async function (req, res, next) {
         res.status(400).send({ message: err.message });
     }
 });
-
+router.post('/change-password', checkLogin, userController.changePassword);
 module.exports = router;
